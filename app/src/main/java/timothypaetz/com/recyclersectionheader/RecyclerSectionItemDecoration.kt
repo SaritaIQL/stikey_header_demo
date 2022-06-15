@@ -2,6 +2,7 @@ package timothypaetz.com.recyclersectionheader
 
 import android.graphics.Canvas
 import android.graphics.Rect
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,11 +47,16 @@ class RecyclerSectionItemDecoration(
             val child = parent.getChildAt(i)
             val position = parent.getChildAdapterPosition(child)
             val title = sectionCallback.getSectionHeader(position)
-            header.text = title
-            if (previousHeader != title || sectionCallback.isSection(position)) {
-                drawHeader(c, child, headerView)
-                previousHeader = title
-            }
+
+
+
+                header.text = title
+                if ( previousHeader != title || sectionCallback.isSection(position)) {
+                    drawHeader(c, child, headerView)
+                    previousHeader=title
+                }
+
+
         }
     }
 
@@ -104,6 +110,6 @@ class RecyclerSectionItemDecoration(
 
     interface SectionCallback {
         fun isSection(position: Int): Boolean
-        fun getSectionHeader(position: Int): CharSequence
+        fun getSectionHeader(position: Int): String
     }
 }
